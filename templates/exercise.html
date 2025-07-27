@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="topnav">
+    <a href="/">Home</a>
+    <a href="/all_muscles">Muscles</a>
+    <a class="active" href="/all_exercises">Exercises</a>
+    <form action="{{ url_for('search') }}" method="get" class="topnav">
+        <input type="text" name="query" placeholder="Search" required />
+      </form>
+</div>
+<h1>Exercise</h1>
+<h2>{{ exercise[1] }}</h2>
+<h1>Muscle</h1>
+<ul>
+    <li>{{ exercise[2] }}</li>
+</ul>
+{% if exercise[3] %}
+<div style="margin-top: 20px;">
+    <h1>Exercise Image:</h1>
+    <img src="{{ url_for('static', filename='images/' + exercise[3]) }}" alt="Exercise Image" style="max-width: 400px; border: 1px solid #ccc; padding: 10px;">
+</div>
+{% else %}
+<p>No image available for this exercise.</p>
+{% endif %}
+{% endblock %}

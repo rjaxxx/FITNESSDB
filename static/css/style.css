@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Cal+Sans&display=swap');
+
+body {
+    background-color: rgb(255, 255, 255);
+}
+
+h1 {
+    color: rgb(0, 0, 0);
+    font-family: "Cal Sans", sans-serif;
+    text-align: center;
+}
+
+h2 {
+  color: rgb(0, 0, 0);
+  font-family: "Cal Sans", sans-serif;
+}
+
+li {
+  font-size: 20px;
+  color: rgb(0, 0, 0);
+  font-family: "Cal Sans", sans-serif;
+}
+
+
+nav {
+    background-color: rgb(0, 0, 0);
+    color: white;
+}
+
+a {
+  font-size: 20px;
+  color: rgb(0, 0, 0);
+  font-family: "Cal Sans", sans-serif;
+}
+
+a:link {
+  color: rgb(255, 0, 79);
+}
+
+a:visited {
+  color: rgb(119, 0, 38);
+}
+
+a:hover {
+  color: rgb(32, 164, 243);
+}
+
+a:active {
+  color: rgb(32, 164, 243);
+}
+
+p {
+    font-family: "Cal Sans", sans-serif;
+    color: rgb(0, 0, 0);
+}
+
+footer {
+    font-family: "Cal Sans", sans-serif;
+}
+
+
+.topnav {
+  background-color: #000000;
+  overflow: hidden;
+  border-radius: 30px;
+
+  display: flex;
+  justify-content: center;  /* Center the nav-links */
+  align-items: center;
+  padding: 0 20px;
+  position: relative;
+}
+
+.left-spacer {
+  flex: 1;   /* fills space on left */
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.topnav a {
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+.topnav a:hover {
+  background-color: #484f69;
+  color: rgb(255, 255, 255);
+  border-radius: 30px;
+}
+
+.topnav a.active {
+  background-color: #ff004f;
+  color: white;
+  border-radius: 30px;
+}
+
+.topnav input[type=text] {
+  font-family: "Cal Sans", sans-serif;
+  padding: 6px 12px;
+  border-radius: 30px;
+  border: none;
+  font-size: 20px;
+  margin-right: 20;   /* push search to far right */
+}
+
+
+@media screen and (max-width: 600px) {
+  .topnav {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .left-spacer {
+    display: none;
+  }
+
+  .nav-links {
+    justify-content: center;
+  }
+
+  .topnav input[type=text] {
+    margin: 10px auto;
+    width: 80%;
+  }
+}
+
+
+.container {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.exercise-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0px;
+  justify-content: start;
+  padding-left: 0px;
+}
+
+.container img {
+  max-width: 70%;
+  height: auto;
+  border: 10px solid #ccc;
+  padding: 0px;
+  box-sizing: border-box;
+  border-radius: 30px;
+}
+
+
+
+.container .text {
+  margin-top: 5px;
+}

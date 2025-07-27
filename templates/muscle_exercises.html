@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="topnav">
+  <a href="/">Home</a>
+  <a class="active" href="/all_muscles">Muscles</a>
+  <a href="/all_exercises">Exercises</a>
+  <form action="{{ url_for('search') }}" method="get" class="topnav">
+    <input type="text" name="query" placeholder="Search" required />
+  </form>
+</div>
+
+<h1>Muscle:</h1>
+<h2>{{ muscle[0] }}</h2>
+
+<h1>Exercises:</h1>
+<ul>
+  {% for exercise in exercises %}
+    <li><a href="/exercise/{{ exercise[0] }}">{{ exercise[1] }}</a></li>
+  {% endfor %}
+</ul>
+{% endblock %}

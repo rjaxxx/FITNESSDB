@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="topnav">
+    <a class="active" href="/">Home</a>
+    <a href="/all_muscles">Muscles</a>
+    <a href="/all_exercises">Exercises</a>
+    <form action="{{ url_for('search') }}" method="get" class="topnav">
+        <input type="text" name="query" placeholder="Search" required />
+    </form>
+  </div>
+  <h1>Search Results for "{{ query }}"</h1>
+  <h2>Muscles</h2>
+  {% if muscles %}
+    <ul>
+      {% for muscle in muscles %}
+        <li><a href="{{ url_for('muscle_exercises', id=muscle[0]) }}">{{ muscle[1] }}</a></li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No muscles found.</p>
+  {% endif %}
+  <h2>Exercises</h2>
+  {% if exercises %}
+    <ul>
+      {% for exercise in exercises %}
+        <li><a href="{{ url_for('exercise', id=exercise[0]) }}">{{ exercise[1] }}</a></li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No exercises found.</p>
+  {% endif %}
+{% endblock %}
+
