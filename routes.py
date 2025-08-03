@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+import random 
 import sqlite3
 
 
@@ -8,7 +9,17 @@ app = Flask(__name__)
 # Home page to display previews
 @app.route('/')
 def home():
-    return render_template('home.html', title='Home')
+    conn = sqlite3.connect('fitness.db')
+    conn.row_factory = sqlite3.Row
+    cur = conn.cursor()
+    cur.execute("SELECT image_url FROM Images")
+    image_rows = cur.fetchall()
+    conn.close()
+    if not image_rows:
+        return "No images available."
+    random_images = random.sample(image_rows, 10)
+    image_urls = [image['image_url'] for image in random_images]
+    return render_template('home.html', title="Home", images=image_urls)
 
 
 #
