@@ -10,12 +10,12 @@
     </form>
 </div>
 
-<h1>Welcome to the Fitness App!</h1>
+<h1>Welcome to the Exercise Database!</h1>
 
 <h2>Image Gallery Preview</h2>
 <div class="gallery-preview">
   {% for image in images %}
-    <div class="gallery-item" onclick="openModal('{{ url_for('static', filename='images/' + image) }}')">
+    <div class="gallery-item">
       <img src="{{ url_for('static', filename='images/' + image) }}" alt="Random Image" class="preview-image">
     </div>
   {% endfor %}

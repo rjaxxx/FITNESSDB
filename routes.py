@@ -22,7 +22,7 @@ def home():
     return render_template('home.html', title="Home", images=image_urls)
 
 
-#
+# Display exercises
 @app.route('/all_exercises')
 def all_exercises():
     conn = sqlite3.connect('fitness.db')
