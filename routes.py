@@ -9,9 +9,11 @@ app = Flask(__name__)
 # Home page to display previews
 @app.route('/')
 def home():
+    # Connect to database
     conn = sqlite3.connect('fitness.db')
     conn.row_factory = sqlite3.Row
     cur = conn.cursor()
+    # Select image url
     cur.execute("SELECT image_url FROM Images")
     image_rows = cur.fetchall()
     conn.close()
@@ -22,12 +24,14 @@ def home():
     return render_template('home.html', title="Home", images=image_urls)
 
 
-# Display exercises
+# Display exercises 
 @app.route('/all_exercises')
 def all_exercises():
+    # Connect to database
     conn = sqlite3.connect('fitness.db')
     conn.row_factory = sqlite3.Row
     cur = conn.cursor()
+    # Select exercise id and name, muscle name and image url
     cur.execute("""
         SELECT e.exercise_id, e.exercise_name, m.muscle_name, i.image_url
         FROM Exercises e
@@ -41,8 +45,10 @@ def all_exercises():
 
 @app.route("/exercise/<int:id>")
 def exercise(id):
+    # Connect to database
     conn = sqlite3.connect('fitness.db')
     cur = conn.cursor()
+    # Select exercise id and name, muscle name and specific image url
     cur.execute("""
         SELECT e.exercise_id, e.exercise_name, m.muscle_name, i.image_url
         FROM Exercises e
@@ -58,8 +64,10 @@ def exercise(id):
 
 @app.route('/all_muscles')
 def all_muscles():
+    # Connect to database
     conn = sqlite3.connect('fitness.db')
     cur = conn.cursor()
+    # Select muscle id and name
     cur.execute("SELECT * FROM Muscles")
     muscles = cur.fetchall()
     conn.close()
@@ -69,10 +77,13 @@ def all_muscles():
 #
 @app.route("/muscle/<int:id>")
 def muscle_exercises(id):
+    # Connect to database
     conn = sqlite3.connect('fitness.db')
     cur = conn.cursor()
+    # Select specific muscle name
     cur.execute("SELECT muscle_name FROM Muscles WHERE muscle_id = ?", (id,))
     muscle = cur.fetchone()
+    # Select specific exercise id and names
     cur.execute("SELECT exercise_id, exercise_name FROM Exercises WHERE muscle_id = ?", (id,))
     exercises = cur.fetchall()
     title = 'Muscles - ' + str(muscle[0])
@@ -83,11 +94,14 @@ def muscle_exercises(id):
 # This is a function to search the database for infromation similar to entered string
 @app.route('/search')
 def search():
+    # Connect to database
     query = request.args.get('query', '').strip()
     conn = sqlite3.connect('fitness.db')
     cur = conn.cursor()
+    # Select specific muscle id and name
     cur.execute("SELECT muscle_id, muscle_name FROM Muscles WHERE muscle_name LIKE ?", ('%' + query + '%',))
     muscles = cur.fetchall()
+    # Select specific exercise id and name 
     cur.execute("SELECT exercise_id, exercise_name FROM Exercises WHERE exercise_name LIKE ?", ('%' + query + '%',))
     exercises = cur.fetchall()
     conn.close()
