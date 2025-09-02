@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
-
 {% block content %}
+<!--Top navigation bar and search box-->
 <div class="topnav">
     <a class="active" href="/">Home</a>
     <a href="/all_muscles">Muscles</a>
@@ -9,9 +9,8 @@
       <input type="text" name="query" placeholder="Search" required />
     </form>
 </div>
-
+<!--Display random exercise images in a grid format-->
 <h1>Welcome to the Exercise Database!</h1>
-
 <h2>Image Gallery Preview</h2>
 <div class="gallery-preview">
   {% for image in images %}

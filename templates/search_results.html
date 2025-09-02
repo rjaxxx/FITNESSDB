@@ -1,5 +1,6 @@
 {% extends 'layout.html' %}
 {% block content %}
+<!--Top navigation bar and search box-->
 <div class="topnav">
     <a class="active" href="/">Home</a>
     <a href="/all_muscles">Muscles</a>
@@ -8,6 +9,7 @@
         <input type="text" name="query" placeholder="Search" required />
     </form>
   </div>
+<!--Display exercise images in a grid format-->
   <h1>Search Results for "{{ query }}"</h1>
   <h2>Muscles</h2>
   {% if muscles %}

@@ -1,5 +1,6 @@
 {% extends 'layout.html' %}
 {% block content %}
+<!--Top navigation bar and search box-->
 <div class="topnav">
   <a href="/">Home</a>
   <a class="active" href="/all_muscles">Muscles</a>
@@ -8,10 +9,9 @@
     <input type="text" name="query" placeholder="Search" required />
   </form>
 </div>
-
+<!--Display exercise list for specific muscle-->
 <h1>Muscle:</h1>
 <h2>{{ muscle[0] }}</h2>
-
 <h1>Exercises:</h1>
 <ul>
   {% for exercise in exercises %}

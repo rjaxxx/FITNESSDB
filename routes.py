@@ -43,6 +43,7 @@ def all_exercises():
     return render_template('all_exercises.html', title='All Exercises', exercises=exercises)
 
 
+# Display specific exercise
 @app.route("/exercise/<int:id>")
 def exercise(id):
     # Connect to database
@@ -62,6 +63,7 @@ def exercise(id):
     return render_template('exercise.html', title=title, exercise=exercise)
 
 
+# Display all muscles
 @app.route('/all_muscles')
 def all_muscles():
     # Connect to database
@@ -74,7 +76,7 @@ def all_muscles():
     return render_template('all_muscles.html', title='Muscles', muscles=muscles)
 
 
-#
+# Display specific muscle
 @app.route("/muscle/<int:id>")
 def muscle_exercises(id):
     # Connect to database
