@@ -24,7 +24,7 @@ def home():
     return render_template('home.html', title="Home", images=image_urls)
 
 
-# Display exercises 
+# Display all exercises 
 @app.route('/all_exercises')
 def all_exercises():
     # Connect to database
@@ -43,7 +43,7 @@ def all_exercises():
     return render_template('all_exercises.html', title='All Exercises', exercises=exercises)
 
 
-# Display specific exercise
+# Display specific exercise information
 @app.route("/exercise/<int:id>")
 def exercise(id):
     # Connect to database
@@ -69,14 +69,14 @@ def all_muscles():
     # Connect to database
     conn = sqlite3.connect('fitness.db')
     cur = conn.cursor()
-    # Select muscle id and name
+    # Select all muscle id and name
     cur.execute("SELECT * FROM Muscles")
     muscles = cur.fetchall()
     conn.close()
     return render_template('all_muscles.html', title='Muscles', muscles=muscles)
 
 
-# Display specific muscle
+# Display specific muscle information
 @app.route("/muscle/<int:id>")
 def muscle_exercises(id):
     # Connect to database
@@ -110,5 +110,6 @@ def search():
     return render_template('search_results.html', title='Search Results', query=query, muscles=muscles, exercises=exercises)
 
 
+# Run code on port:5000
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
