@@ -1,27 +1,21 @@
 {% extends 'layout.html' %}
+
 {% block content %}
 <!--Top navigation bar and search box-->
 <div class="topnav">
-    <a class="active" href="/">Home</a>
-    <a href="/all_muscles">Muscles</a>
-    <a href="/all_exercises">Exercises</a>
-    <form action="{{ url_for('search') }}" method="get" class="topnav">
+  <a class="active" href="/">Home</a>
+  <a href="/all_muscles">Muscles</a>
+  <a href="/all_exercises">Exercises</a>
+  <form action="{{ url_for('search') }}" method="get" class="topnav">
       <input type="text" name="query" placeholder="Search" required />
     </form>
 </div>
-<!--Display random exercise images in a grid format-->
-<h1>Welcome to the Exercise Database!</h1>
-<h2>Image Gallery Preview</h2>
-<div class="gallery-preview">
-  {% for image in images %}
-    <div class="gallery-item">
-      <img src="{{ url_for('static', filename='images/' + image) }}" alt="Random Image" class="preview-image">
-    </div>
-  {% endfor %}
-</div>
 
-<h1>Links to other pages</h1>
-<p><a href="/all_muscles">View All Muscles</a></p>
-<p><a href="/all_exercises">View All Exercises</a></p>
-
+<section class="links-section container">
+    <h2>Explore More</h2>
+    <ul>
+        <li><a href="/all_muscles">View All Muscles</a></li>
+        <li><a href="/all_exercises">View All Exercises</a></li>
+    </ul>
+</section>
 {% endblock %}

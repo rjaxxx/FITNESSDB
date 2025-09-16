@@ -1,30 +1,32 @@
 from flask import Flask, render_template, request
-import random 
+import random
 import sqlite3
 
 
 app = Flask(__name__)
 
 
-# Home page to display previews
 @app.route('/')
 def home():
-    # Connect to database
-    conn = sqlite3.connect('fitness.db')
-    conn.row_factory = sqlite3.Row
-    cur = conn.cursor()
-    # Select image url
-    cur.execute("SELECT image_url FROM Images")
-    image_rows = cur.fetchall()
-    conn.close()
-    if not image_rows:
-        return "No images available."
-    random_images = random.sample(image_rows, 10)
-    image_urls = [image['image_url'] for image in random_images]
-    return render_template('home.html', title="Home", images=image_urls)
+    try:
+        with sqlite3.connect('fitness.db') as conn:
+            conn.row_factory = sqlite3.Row
+            cur = conn.cursor()
+            cur.execute("SELECT image_url FROM Images ORDER BY RANDOM() LIMIT 10")
+            image_rows = cur.fetchall()
+
+        if not image_rows:
+            return render_template('home.html', title="Home", images=[], message="No images available.")
+
+        image_urls = [row['image_url'] for row in image_rows]
+        return render_template('home.html', title="Home", images=image_urls)
+
+    except sqlite3.Error as e:
+        error_msg = f"Database error: {e}"
+        return render_template('home.html', title="Home", images=[], message=error_msg)
 
 
-# Display all exercises 
+# Display all exercises
 @app.route('/all_exercises')
 def all_exercises():
     # Connect to database
@@ -103,7 +105,7 @@ def search():
     # Select specific muscle id and name
     cur.execute("SELECT muscle_id, muscle_name FROM Muscles WHERE muscle_name LIKE ?", ('%' + query + '%',))
     muscles = cur.fetchall()
-    # Select specific exercise id and name 
+    # Select specific exercise id and name
     cur.execute("SELECT exercise_id, exercise_name FROM Exercises WHERE exercise_name LIKE ?", ('%' + query + '%',))
     exercises = cur.fetchall()
     conn.close()
