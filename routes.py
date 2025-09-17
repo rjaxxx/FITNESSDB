@@ -4,6 +4,11 @@ import sqlite3
 
 app = Flask(__name__)
 
+# 404 Page for when page not found
+@app.errorhandler(404)
+def not_found(error):
+    return render_template("404.html", title='Page Not Found')
+
 
 # Home page with search engine
 @app.route('/')
