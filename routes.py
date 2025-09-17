@@ -1,32 +1,17 @@
 from flask import Flask, render_template, request
-import random
 import sqlite3
 
 
 app = Flask(__name__)
 
 
+# Home page with search engine
 @app.route('/')
 def home():
-    try:
-        with sqlite3.connect('fitness.db') as conn:
-            conn.row_factory = sqlite3.Row
-            cur = conn.cursor()
-            cur.execute("SELECT image_url FROM Images ORDER BY RANDOM() LIMIT 10")
-            image_rows = cur.fetchall()
-
-        if not image_rows:
-            return render_template('home.html', title="Home", images=[], message="No images available.")
-
-        image_urls = [row['image_url'] for row in image_rows]
-        return render_template('home.html', title="Home", images=image_urls)
-
-    except sqlite3.Error as e:
-        error_msg = f"Database error: {e}"
-        return render_template('home.html', title="Home", images=[], message=error_msg)
+    return render_template('home.html', title="Home")
 
 
-# Display all exercises
+# Display all exercises in grid with images
 @app.route('/all_exercises')
 def all_exercises():
     # Connect to database
@@ -45,7 +30,7 @@ def all_exercises():
     return render_template('all_exercises.html', title='All Exercises', exercises=exercises)
 
 
-# Display specific exercise information
+# Display specific exercise information with muscle name and exercise image
 @app.route("/exercise/<int:id>")
 def exercise(id):
     # Connect to database
@@ -65,20 +50,20 @@ def exercise(id):
     return render_template('exercise.html', title=title, exercise=exercise)
 
 
-# Display all muscles
+# Display all muscles in grid
 @app.route('/all_muscles')
 def all_muscles():
     # Connect to database
     conn = sqlite3.connect('fitness.db')
     cur = conn.cursor()
-    # Select all muscle id and name
+    # Select all muscle ids and names
     cur.execute("SELECT * FROM Muscles")
     muscles = cur.fetchall()
     conn.close()
     return render_template('all_muscles.html', title='Muscles', muscles=muscles)
 
 
-# Display specific muscle information
+# Display specific muscle information and what exercises target it
 @app.route("/muscle/<int:id>")
 def muscle_exercises(id):
     # Connect to database
@@ -95,7 +80,7 @@ def muscle_exercises(id):
     return render_template('muscle_exercises.html', title=title, muscle=muscle, exercises=exercises)
 
 
-# This is a function to search the database for infromation similar to entered string
+# This is a function to search the database for infromation similar to input
 @app.route('/search')
 def search():
     # Connect to database

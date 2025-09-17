@@ -6,7 +6,7 @@
     <a class="active" href="/all_muscles">Muscles</a>
     <a href="/all_exercises">Exercises</a>
     <form action="{{ url_for('search') }}" method="get" class="topnav">
-      <input type="text" name="query" placeholder="Search" required />
+      <input type="text" name="query" placeholder="Search" maxlength="25" required />
     </form>
   </div>
 <!--Display muscle names in a grid format-->

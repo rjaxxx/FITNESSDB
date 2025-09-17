@@ -1,21 +1,36 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-<!--Top navigation bar and search box-->
+
+<!-- Navigation Bar -->
 <div class="topnav">
   <a class="active" href="/">Home</a>
   <a href="/all_muscles">Muscles</a>
   <a href="/all_exercises">Exercises</a>
-  <form action="{{ url_for('search') }}" method="get" class="topnav">
-      <input type="text" name="query" placeholder="Search" required />
-    </form>
+  <form action="{{ url_for('search') }}" method="get" class="topnav-search">
+    <input type="text" name="query" placeholder="Search" maxlength="25" required />
+  </form>
 </div>
 
+<!-- Search Section -->
+<div class="hero-search-section">
+  <div class="hero-text">
+    <h1>Discover Your Next Workout</h1>
+    <p>Search by exercise name or muscle group</p>
+    <form action="{{ url_for('search') }}" method="get" class="hero-search-form">
+      <input type="text" name="query" placeholder="Exercise or muscle name..." maxlength="25" required>
+      <button type="submit">Search</button>
+    </form>
+  </div>
+</div>
+
+<!-- Links to other pages -->
 <section class="links-section container">
-    <h2>Explore More</h2>
-    <ul>
-        <li><a href="/all_muscles">View All Muscles</a></li>
-        <li><a href="/all_exercises">View All Exercises</a></li>
-    </ul>
+  <h2>Explore More</h2>
+  <ul>
+    <li><a href="/all_muscles">Browse Muscle Groups</a></li>
+    <li><a href="/all_exercises">See All Exercises</a></li>
+  </ul>
 </section>
+
 {% endblock %}
