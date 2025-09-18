@@ -225,6 +225,7 @@ footer {
 
 .hero-search-form input[type="text"] {
   width: 60%;
+  font-family: "Cal Sans", sans-serif;
   max-width: 400px;
   padding: 15px 20px;
   border: 2px solid #ddd;
