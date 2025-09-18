@@ -10,9 +10,7 @@
   </form>
 </div>
 <!--Display exercise list for specific muscle-->
-<h1>Muscle:</h1>
-<h2>{{ muscle[0] }}</h2>
-<h1>Exercises:</h1>
+<h1 style = "text-align: left;">{{ muscle[0] }}</h1>
 <ul>
   {% for exercise in exercises %}
     <li><a href="/exercise/{{ exercise[0] }}">{{ exercise[1] }}</a></li>

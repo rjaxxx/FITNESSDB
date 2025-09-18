@@ -4,6 +4,7 @@ import sqlite3
 
 app = Flask(__name__)
 
+
 # 404 Page for when page not found
 @app.errorhandler(404)
 def not_found(error):

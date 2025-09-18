@@ -10,15 +10,11 @@
       </form>
 </div>
 <!--Display specific exercise name and image-->
-<h1>Exercise</h1>
-<h2>{{ exercise[1] }}</h2>
-<h1>Muscle</h1>
-<ul>
-    <li>{{ exercise[2] }}</li>
-</ul>
+<h1 style = "text-align: left;">{{ exercise[1] }}</h1>
+<h2>Target - {{ exercise[2] }}</h2>
 {% if exercise[3] %}
 <div style="margin-top: 20px;">
-    <h1>Exercise Image:</h1>
+    <h1 style = "text-align: left;">Form</h1>
     <img src="{{ url_for('static', filename='images/' + exercise[3]) }}" alt="Exercise Image" style="max-width: 400px; border: 1px solid #ccc; padding: 10px;">
 </div>
 {% else %}
